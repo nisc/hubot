@@ -2,6 +2,11 @@
 
 MY_DIR="$( cd "$( dirname $0 )" && pwd)"
 
+cd $MY_DIR/..
+git checkout -- .
+git filter-branch -f --index-filter 'git rm --cached --ignore-unmatch \*' HEAD
+git push origin master -f
+
 if [ -z "$HUBOT_PLUGINS_DIR" ]
 then
   export HUBOT_PLUGINS_DIR=$MY_DIR/plugins
